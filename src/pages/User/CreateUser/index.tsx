@@ -5,8 +5,6 @@ import { Form } from "react-bootstrap";
 import { FormProvider } from "react-hook-form";
 import { ICreateUser } from "./types";
 import InputText from "../../../components/inputs/textInput";
-import Select from "../../../components/inputs/selectInput";
-import Switch from "../../../components/inputs/switchInput";
 import TextButton from "../../../components/inputs/button";
 import api from "../../../services/api";
 import { useForm } from "react-hook-form";

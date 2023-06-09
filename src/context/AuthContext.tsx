@@ -1,5 +1,4 @@
-import { ILogin, IResponse } from "utils/Auth";
-import { ToastContainer, toast } from "react-toastify";
+import { ILogin, IResponse, User } from "utils/AuthTypes";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import api from "services/api";
@@ -7,6 +6,7 @@ import { useLoading } from "./LoadingContext";
 import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
+  user: User | undefined;
   handleLogin: (data: ILogin) => void;
   handleLogout: () => void;
   cleanState: () => void;
@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
 
   const [authenticated, setAuthenticated] = useState(false);
+  const [user, setUser] = useState<User | undefined>();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,6 +42,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("refresh_token", response.data.refresh_token);
+      setUser(response.data.user);
 
       api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
 
@@ -73,6 +75,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <AuthContext.Provider
       value={{
+        user,
         handleLogin,
         authenticated,
         setAuthenticated,

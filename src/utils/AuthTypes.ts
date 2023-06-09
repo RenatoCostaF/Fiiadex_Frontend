@@ -3,10 +3,17 @@ export interface ILogin {
   password: string;
 }
 
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export interface IResponse {
   data: {
     token: string;
     refresh_token: string;
+    user: User;
   };
   status: number;
 }

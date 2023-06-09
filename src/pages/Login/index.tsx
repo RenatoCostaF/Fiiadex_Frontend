@@ -2,7 +2,7 @@ import { Col, Form } from "react-bootstrap";
 import { Container, Content, ImageLogo } from "./styles";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ILogin } from "utils/Auth";
+import { ILogin } from "utils/AuthTypes";
 import InputText from "../../components/inputs/textInput";
 import Logo from "assets/Logo.png";
 import TextButton from "../../components/inputs/button";

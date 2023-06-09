@@ -1,6 +1,7 @@
-import { useCallback } from "react";
+import { InputControl, Label } from "./style";
+import { useCallback, useEffect, useState } from "react";
+
 import { useFormContext } from "react-hook-form";
-import { InputControl, InputControlSwitch, Label } from "./style";
 
 type Types = "text" | "email" | "number" | "date" | "time";
 
@@ -32,9 +33,9 @@ function InputText({
         input.value = value;
       }
     },
+
     [name]
   );
-
   return (
     <>
       {label && <Label>{label}</Label>}
@@ -47,7 +48,9 @@ function InputText({
         onChangeCapture={(e: React.FormEvent<HTMLInputElement>) =>
           handleValue(e.currentTarget.value)
         }
-        {...register(name, { required })}
+        {...register(name, {
+          required: { value: required ? true : false, message: "Teste" },
+        })}
       />
     </>
   );

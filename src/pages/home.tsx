@@ -1,13 +1,11 @@
-import CreateUser from "./User/CreateUser";
+import Body from "components/Body";
 import Header from "../components/Header";
-import { useAuth } from "context/AuthContext";
 
 function Home() {
-  const { handleLogout } = useAuth();
   return (
     <>
       <Header />
-      <CreateUser />
+      <Body />
     </>
   );
 }
