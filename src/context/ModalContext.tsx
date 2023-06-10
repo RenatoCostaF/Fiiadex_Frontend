@@ -6,6 +6,8 @@ export interface ModalTypes {
   show: boolean;
   children?: React.ReactNode;
   component?: JSX.Element;
+  hasExpiredSection?: boolean;
+  hasTimeOut?: boolean;
   size?: "xl" | "lg" | "sm" | "md";
 }
 

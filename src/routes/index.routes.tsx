@@ -1,21 +1,47 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { ROUTES, ROUTES_AUTHENTICATED } from "./list.routes";
+import { Route, Routes } from "react-router-dom";
 
-import CreateCompra from "pages/Compra/CreateCompra";
-import Home from "../pages/home";
-import Login from "../pages/Login";
-import { useAuth } from "context/AuthContext";
+import Header from "components/Header";
+import { ReactNode } from "react";
+import RequireAuth from "components/RequireAuth";
+
+function HeaderLayout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
+}
 
 function Paths() {
-  const { authenticated } = useAuth();
-
   return (
     <Routes>
-      <Route
-        path="/dashboard"
-        element={authenticated ? <Home /> : <Link to="/" />}
-      />
-      <Route path="/createCompra" element={<CreateCompra />} />
-      <Route path="/" element={<Login />} />
+      {ROUTES.map((route) => {
+        const Component = route.element;
+
+        return (
+          <Route key={route.path} path={route.path} element={<Component />} />
+        );
+      })}
+
+      <Route element={<RequireAuth />}>
+        {ROUTES_AUTHENTICATED.map((route) => {
+          const Component = route.element;
+
+          return (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={
+                <HeaderLayout>
+                  <Component />
+                </HeaderLayout>
+              }
+            />
+          );
+        })}
+      </Route>
     </Routes>
   );
 }

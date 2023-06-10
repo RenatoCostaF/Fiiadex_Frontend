@@ -1,30 +1,18 @@
-import { ButtonInput, Container, ContainerMenu } from "./style";
+import * as S from "./style";
 
-import CreateCompra from "pages/Compra/CreateCompra";
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from "context/AuthContext";
-import { useModal } from "context/ModalContext";
 
 function Header() {
   const { handleLogout } = useAuth();
 
-  const { setModal } = useModal();
-
-  const handleCompra = () => {
-    setModal({
-      show: true,
-      size: "lg",
-      component: <CreateCompra />,
-    });
-  };
-
   return (
-    <Container>
-      <ContainerMenu>
-        <ButtonInput type="button" onClick={() => handleCompra()}>
-          Criar Compra
-        </ButtonInput>
-      </ContainerMenu>
+    <S.Container>
+      <S.ContainerMenu>
+        <S.LinkButton to="/dashboard">Início</S.LinkButton>
+
+        <S.LinkButton to="/compra">Compra</S.LinkButton>
+      </S.ContainerMenu>
 
       <FiLogOut
         color="#ffff00"
@@ -32,7 +20,7 @@ function Header() {
         onClick={() => handleLogout()}
         style={{ cursor: "pointer" }}
       />
-    </Container>
+    </S.Container>
   );
 }
 

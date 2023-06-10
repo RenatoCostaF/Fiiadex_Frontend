@@ -1,8 +1,18 @@
 import { CustomModal, CustomModalBody, CustomModalHeader } from "./style";
 import { ModalTypes, useModal } from "context/ModalContext";
 
-function DefaultModal({ show, size, component }: ModalTypes) {
+import { useAuth } from "context/AuthContext";
+import { useEffect } from "react";
+
+function DefaultModal({
+  show,
+  size,
+  component,
+  hasTimeOut,
+  hasExpiredSection,
+}: ModalTypes) {
   const { setModal } = useModal();
+  const { handleLogout } = useAuth();
 
   const onHide = () => {
     setModal({
@@ -10,9 +20,30 @@ function DefaultModal({ show, size, component }: ModalTypes) {
     });
   };
 
+  useEffect(() => {
+    if (hasExpiredSection) {
+      const timer = setTimeout(() => {
+        handleLogout();
+        onHide();
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [hasExpiredSection]);
+
+  useEffect(() => {
+    if (hasTimeOut) {
+      const timer = setTimeout(() => {
+        onHide();
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [hasTimeOut]);
+
   return (
     <CustomModal centered show={show} size={size ?? undefined}>
-      <CustomModalHeader closeButton onHide={onHide}></CustomModalHeader>
+      {!hasExpiredSection && (
+        <CustomModalHeader closeButton onHide={onHide}></CustomModalHeader>
+      )}
 
       <CustomModalBody>{component}</CustomModalBody>
     </CustomModal>

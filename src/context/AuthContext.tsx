@@ -1,8 +1,10 @@
 import { ILogin, IResponse, User } from "utils/AuthTypes";
 import { createContext, useContext, useEffect, useState } from "react";
 
+import FailRequest from "components/HandleRequest/Fail";
 import api from "services/api";
 import { useLoading } from "./LoadingContext";
+import { useModal } from "./ModalContext";
 import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
@@ -51,7 +53,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setAuthenticated(true);
       return;
     } catch (err: any) {
-      alert(err.response.data.message);
       setLoading(false);
       setAuthenticated(false);
       return;
@@ -64,6 +65,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const cleanState = () => {
+    setUser(undefined);
     delete api.defaults.headers.common["Authorization"];
 
     localStorage.removeItem("token");
