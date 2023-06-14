@@ -1,5 +1,6 @@
 import CreateCompra from "pages/Compra/CreateCompra";
 import Home from "pages/home";
+import ListCompra from "pages/Compra/ListCompra";
 import Login from "pages/Login";
 
 export const ROUTES = [
@@ -17,5 +18,9 @@ export const ROUTES_AUTHENTICATED = [
   {
     element: CreateCompra,
     path: "/compra",
+  },
+  {
+    element: ListCompra,
+    path: "/ListCompra",
   },
 ];

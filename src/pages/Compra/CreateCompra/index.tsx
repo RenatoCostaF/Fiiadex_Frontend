@@ -1,6 +1,7 @@
 import * as S from "./style";
 
-import { Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+
 import FailRequest from "components/HandleRequest/Fail";
 import { Form } from "react-bootstrap";
 import { FormProvider } from "react-hook-form";
@@ -63,18 +64,18 @@ function CreateCompra() {
   return (
     <FormProvider {...methods}>
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
+        <S.Title>Cadastro de compra</S.Title>
         <S.Container>
-          <S.ContainerForm>
-            <S.Title>Cadastro de compra</S.Title>
-            <Col sm={6} md={4}>
+          <Col sm={4} md={4}>
+            <Row>
               <InputText
                 name="valorTotal"
                 type="number"
                 label="Valor total"
                 required
               />
-            </Col>
-            <Col sm={6} md={4}>
+            </Row>
+            <Row>
               <Select
                 name="parcelas"
                 label="Parcelas"
@@ -114,20 +115,20 @@ function CreateCompra() {
                 }
                 required
               />
-            </Col>
-            <Col sm={6} md={4}>
+            </Row>
+            <Row>
               <InputText
                 name="valorParcela"
                 type="number"
                 label="Valor das parcelas"
                 required
               />
-            </Col>
+            </Row>
 
-            <Col sm={6} md={4}>
-              <TextButton text="Enviar" type="submit" />
-            </Col>
-          </S.ContainerForm>
+            <Row className="justify-content-end">
+              <TextButton width="160px" text="Enviar" type="submit" />
+            </Row>
+          </Col>
         </S.Container>
       </Form>
     </FormProvider>

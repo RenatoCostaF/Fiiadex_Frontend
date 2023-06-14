@@ -14,7 +14,6 @@ export const Label = styled(Form.Label)`
 
 export const SelectControl = styled(Form.Select)`
   padding: 10px;
-  border: 1px solid black;
   border-radius: 8px;
   background-color: transparent;
   overflow: hidden;
