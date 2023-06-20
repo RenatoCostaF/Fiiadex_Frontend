@@ -12,8 +12,8 @@ export interface ICompra {
 
 export interface CompraParcela {
   compraId: string;
-  dataVencimento: string;
+  valorParcela: string;
+  dataPagamento: string;
   id: string;
-  valor: string;
   status: string;
 }

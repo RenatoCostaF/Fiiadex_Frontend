@@ -39,17 +39,19 @@ function ListCompra() {
   const handleDetail = async (data: CompraParcela[]) => {
     setModal({
       show: true,
-      size: "lg",
+      size: "xl",
       component: (
         <S.ContainerModal>
           {data.map((v, index) => {
             return (
               <Col sm={12} md={12} key={index}>
                 <S.TitleModal>Parcela {index + 1}</S.TitleModal>
-                <S.RowStyle>Valor: {v.valor}</S.RowStyle>
+                <S.RowStyle>
+                  Valor: {parseInt(v.valorParcela).toFixed(2)} R$
+                </S.RowStyle>
                 <S.RowStyle>
                   Data de Vencimento:{" "}
-                  {format(new Date(v.dataVencimento), "dd/MM/yyyy")}
+                  {format(new Date(v.dataPagamento), "dd/MM/yyyy")}
                 </S.RowStyle>
                 <S.RowStyle>Status: {v.status}</S.RowStyle>
               </Col>
@@ -94,10 +96,9 @@ function ListCompra() {
               <th className="text-center">Cliente</th>
               <th className="text-center">Valor Total</th>
               <th className="text-center">Quantidade de Parcelas</th>
-              <th className="text-center">Valor Parcela</th>
               <th className="text-center">Status</th>
               <th className="text-center">Detalhe Parcelas</th>
-              <th className="text-center">Excluir Parcela</th>
+              <th className="text-center">Excluir Compra</th>
             </tr>
           </thead>
           <tbody>
@@ -106,9 +107,7 @@ function ListCompra() {
                 <td className="align-middle text-center">{item.user.name}</td>
                 <td className="align-middle text-center">{item.valorTotal}</td>
                 <td className="align-middle text-center">{item.parcelas}</td>
-                <td className="align-middle text-center">
-                  {item.valorParcela}
-                </td>
+
                 <td className="align-middle text-center">{item.status}</td>
                 <td className="align-middle text-center">
                   <BsFolder2Open

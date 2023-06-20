@@ -1,7 +1,6 @@
 export interface ICreateCompra {
-  valor: number;
-  parcelas: number;
-  valorParcela: number;
-  valorTotal: number;
+  parcelas: string;
+  dataCompra: Date;
+  valorTotal: string;
   userId: number;
 }

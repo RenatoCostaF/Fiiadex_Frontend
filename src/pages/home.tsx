@@ -1,12 +1,5 @@
-import Body from "components/Body";
-import Header from "../components/Header";
-
 function Home() {
-  return (
-    <>
-      <Body />
-    </>
-  );
+  return <></>;
 }
 
 export default Home;

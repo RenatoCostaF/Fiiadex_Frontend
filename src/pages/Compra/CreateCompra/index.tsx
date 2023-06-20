@@ -27,9 +27,9 @@ function CreateCompra() {
 
   const onSubmit = async (compra: ICreateCompra) => {
     const body = {
-      parcelas: compra.parcelas,
-      valorParcela: compra.valorParcela,
-      valorTotal: compra.valorTotal,
+      parcelas: parseInt(compra.parcelas),
+      valorTotal: parseInt(compra.valorTotal),
+      dataCompra: new Date(compra.dataCompra),
       userId: user?.id,
     };
 
@@ -66,7 +66,7 @@ function CreateCompra() {
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
         <S.Title>Cadastro de compra</S.Title>
         <S.Container>
-          <Col sm={4} md={4}>
+          <Col sm={4} md={2}>
             <Row>
               <InputText
                 name="valorTotal"
@@ -91,17 +91,21 @@ function CreateCompra() {
                         {
                           id: "1",
                           value: "1",
-                          name: `1x de ${valorTotal} R$`,
+                          name: `1x de ${parseInt(valorTotal)} R$`,
                         },
                         {
                           id: "2",
                           value: "2",
-                          name: `2x de ${(valorTotal / 2).toFixed(2)} R$`,
+                          name: `2x de ${(parseInt(valorTotal) / 2).toFixed(
+                            2
+                          )} R$`,
                         },
                         {
                           id: "3",
                           value: "3",
-                          name: `3x de ${(valorTotal / 3).toFixed(2)} R$`,
+                          name: `3x de ${(parseInt(valorTotal) / 3).toFixed(
+                            2
+                          )} R$`,
                         },
                       ]
                     : [
@@ -118,9 +122,9 @@ function CreateCompra() {
             </Row>
             <Row>
               <InputText
-                name="valorParcela"
-                type="number"
-                label="Valor das parcelas"
+                name="dataCompra"
+                type="date"
+                label="Data da compra"
                 required
               />
             </Row>

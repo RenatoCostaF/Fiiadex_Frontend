@@ -26,13 +26,6 @@ function Header() {
   }, []);
 
   return (
-    //     <FiLogOut
-    //       color="#ffff00"
-    //       size={24}
-    //       onClick={() => handleLogout()}
-    //       style={{ cursor: "pointer" }}
-    //     />
-
     <Navbar bg="dark" variant="dark" expand="lg" className="flex-column">
       <Container>
         <Navbar.Toggle aria-controls="sidebar-nav" />
@@ -44,11 +37,18 @@ function Header() {
                 Cadastrar Compra
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/ListCompra">
-                Listar Compra
+                Listar Compras
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#">Services</Nav.Link>
-            <Nav.Link href="#">Contact</Nav.Link>
+            <NavDropdown title="Usuário">
+              <NavDropdown.Item as={Link} to="/user">
+                Cadastrar Usuário
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/ListUser">
+                Listar Usuários
+              </NavDropdown.Item>
+            </NavDropdown>
+            {/* <Nav.Link href="#">Contact</Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
         <FiLogOut

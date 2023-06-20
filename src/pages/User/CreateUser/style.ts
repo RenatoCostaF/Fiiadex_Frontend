@@ -7,9 +7,10 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const Title = styled.h1`
+export const TitleTable = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 1em;
-  margin-bottom: 2em;
+  align-items: center;
+  margin: 2rem 2rem;
+  font-size: 2rem;
 `;
