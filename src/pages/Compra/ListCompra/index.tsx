@@ -15,7 +15,7 @@ import { useAuth } from "context/AuthContext";
 import { useModal } from "context/ModalContext";
 
 function ListCompra() {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const { setModal, modalBlur, setModalBlur } = useModal();
 
   const [dataCompra, setDataCompra] = useState<ICompra[]>([]);
@@ -23,8 +23,13 @@ function ListCompra() {
   const getCompra = async () => {
     if (user) {
       try {
-        const { data } = await api.get("/compra");
-        setDataCompra(data.data);
+        if (profile === "ADMIN") {
+          const { data } = await api.get("/compra");
+          setDataCompra(data.data);
+        } else {
+          const { data } = await api.post("/compra", { userId: user.id });
+          setDataCompra(data.data);
+        }
       } catch (err) {}
     } else {
       setModal({
@@ -50,7 +55,7 @@ function ListCompra() {
                   Valor: {parseInt(v.valorParcela).toFixed(2)} R$
                 </S.RowStyle>
                 <S.RowStyle>
-                  Data de Vencimento:{" "}
+                  Data de Vencimento:
                   {format(new Date(v.dataPagamento), "dd/MM/yyyy")}
                 </S.RowStyle>
                 <S.RowStyle>Status: {v.status}</S.RowStyle>
@@ -93,22 +98,30 @@ function ListCompra() {
         <Table>
           <thead>
             <tr>
-              <th className="text-center">Cliente</th>
+              <th className="text-center">Nome</th>
               <th className="text-center">Valor Total</th>
               <th className="text-center">Quantidade de Parcelas</th>
               <th className="text-center">Status</th>
-              <th className="text-center">Detalhe Parcelas</th>
-              <th className="text-center">Excluir Compra</th>
+              <th className="text-center">Data da Compra</th>
+              <th className="text-center">Detalhe das Parcelas</th>
+              {profile === "ADMIN" && (
+                <th className="text-center">Excluir Compra</th>
+              )}
             </tr>
           </thead>
           <tbody>
             {dataCompra?.map((item: ICompra) => (
               <tr key={item.id}>
                 <td className="align-middle text-center">{item.user.name}</td>
-                <td className="align-middle text-center">{item.valorTotal}</td>
+                <td className="align-middle text-center">
+                  {item.valorTotal.toFixed(2)} R$
+                </td>
                 <td className="align-middle text-center">{item.parcelas}</td>
 
                 <td className="align-middle text-center">{item.status}</td>
+                <td className="align-middle text-center">
+                  {format(new Date(item.dataCompra), "dd/MM/yyyy")}
+                </td>
                 <td className="align-middle text-center">
                   <BsFolder2Open
                     size={24}
@@ -118,15 +131,17 @@ function ListCompra() {
                     }}
                   />
                 </td>
-                <td className="align-middle text-center">
-                  <AiOutlineDelete
-                    size={24}
-                    onClick={() => handleDelete(item.id)}
-                    style={{
-                      cursor: "pointer",
-                    }}
-                  />
-                </td>
+                {profile === "ADMIN" && (
+                  <td className="align-middle text-center">
+                    <AiOutlineDelete
+                      size={24}
+                      onClick={() => handleDelete(item.id)}
+                      style={{
+                        cursor: "pointer",
+                      }}
+                    />
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

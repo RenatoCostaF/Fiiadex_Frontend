@@ -83,8 +83,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       pathname.includes(route.path.replace(":id", ""))
     );
 
-    console.log(currentRoute, "CURRENT ROUTEEEEEEEEEEEEEEEEE");
-
     if (profile) {
       if (
         currentRoute?.profiles &&

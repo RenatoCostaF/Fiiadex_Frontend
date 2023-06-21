@@ -14,7 +14,7 @@ const links = [
       {
         title: "Listar Compras",
         path: "/ListCompra",
-        profiles: [PROFILES.ADMIN],
+        profiles: [PROFILES.ADMIN, PROFILES.USER],
       },
     ],
   },
