@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import links from "utils/LinkView";
 import { useAuth } from "context/AuthContext";
 
 function Header() {
-  const { handleLogout } = useAuth();
+  const { profile, handleLogout } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -32,7 +33,32 @@ function Header() {
 
         <Navbar.Collapse id="sidebar-nav">
           <Nav className={isMobile ? "flex-column" : "flex-row"}>
-            <NavDropdown title="Compra">
+            {links.map((link) => {
+              if (profile && link.profiles.includes(profile)) {
+                return (
+                  <>
+                    <NavDropdown title={link.title}>
+                      {link.submenu?.length &&
+                        link.submenu.map((submenu) => {
+                          if (profile && submenu.profiles.includes(profile)) {
+                            return (
+                              <>
+                                <NavDropdown.Item as={Link} to={submenu.path}>
+                                  {submenu.title}
+                                </NavDropdown.Item>
+                              </>
+                            );
+                          }
+                          return;
+                        })}
+                    </NavDropdown>
+                    ;
+                  </>
+                );
+              }
+            })}
+
+            {/* <NavDropdown title="Compra">
               <NavDropdown.Item as={Link} to="/compra">
                 Cadastrar Compra
               </NavDropdown.Item>
@@ -47,7 +73,7 @@ function Header() {
               <NavDropdown.Item as={Link} to="/ListUser">
                 Listar Usuários
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
             {/* <Nav.Link href="#">Contact</Nav.Link> */}
           </Nav>
         </Navbar.Collapse>

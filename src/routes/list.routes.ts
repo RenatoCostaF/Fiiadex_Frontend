@@ -4,6 +4,7 @@ import Home from "pages/home";
 import ListCompra from "pages/Compra/ListCompra";
 import ListUser from "pages/User/ListUser";
 import Login from "pages/Login";
+import PROFILES from "utils/Profiles";
 
 export const ROUTES = [
   {
@@ -16,21 +17,26 @@ export const ROUTES_AUTHENTICATED = [
   {
     element: Home,
     path: "/dashboard",
+    profiles: [PROFILES.ADMIN, PROFILES.USER],
   },
   {
     element: CreateCompra,
     path: "/compra",
+    profiles: [PROFILES.ADMIN],
   },
   {
     element: ListCompra,
     path: "/ListCompra",
+    profiles: [PROFILES.ADMIN],
   },
   {
     element: CreateUser,
     path: "/user",
+    profiles: [PROFILES.ADMIN],
   },
   {
     element: ListUser,
     path: "/listUser",
+    profiles: [PROFILES.ADMIN],
   },
 ];

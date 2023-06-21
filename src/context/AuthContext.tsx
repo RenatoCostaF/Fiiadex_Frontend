@@ -1,11 +1,11 @@
 import { ILogin, IResponse, User } from "utils/AuthTypes";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import FailRequest from "components/HandleRequest/Fail";
+import PROFILES from "utils/Profiles";
+import { ROUTES_AUTHENTICATED } from "routes/list.routes";
 import api from "services/api";
 import { useLoading } from "./LoadingContext";
-import { useModal } from "./ModalContext";
-import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
   user: User | undefined;
@@ -14,16 +14,19 @@ interface AuthContextType {
   cleanState: () => void;
   authenticated: boolean;
   setAuthenticated: (b: boolean) => void;
+  profile: PROFILES | undefined;
 }
 
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { setLoading } = useLoading();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState<User | undefined>();
+  const [profile, setProfile] = useState<PROFILES>();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -45,6 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("refresh_token", response.data.refresh_token);
       setUser(response.data.user);
+      setProfile(response.data.user.role);
 
       api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
 
@@ -74,6 +78,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return;
   };
 
+  useEffect(() => {
+    const currentRoute = ROUTES_AUTHENTICATED.find((route) =>
+      pathname.includes(route.path.replace(":id", ""))
+    );
+
+    console.log(currentRoute, "CURRENT ROUTEEEEEEEEEEEEEEEEE");
+
+    if (profile) {
+      if (
+        currentRoute?.profiles &&
+        !currentRoute?.profiles?.includes(profile)
+      ) {
+        cleanState();
+        navigate("/");
+      }
+    }
+  }, [pathname, profile]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -83,6 +105,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setAuthenticated,
         handleLogout,
         cleanState,
+        profile,
       }}
     >
       {children}
