@@ -57,24 +57,6 @@ function Header() {
                 );
               }
             })}
-
-            {/* <NavDropdown title="Compra">
-              <NavDropdown.Item as={Link} to="/compra">
-                Cadastrar Compra
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/ListCompra">
-                Listar Compras
-              </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="Usuário">
-              <NavDropdown.Item as={Link} to="/user">
-                Cadastrar Usuário
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/ListUser">
-                Listar Usuários
-              </NavDropdown.Item>
-            </NavDropdown> */}
-            {/* <Nav.Link href="#">Contact</Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
         <FiLogOut

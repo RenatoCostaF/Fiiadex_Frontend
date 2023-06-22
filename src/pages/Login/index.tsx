@@ -3,10 +3,10 @@ import * as S from "./styles";
 import { Col, Form } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 
+import Button from "../../components/Button";
 import { ILogin } from "utils/AuthTypes";
-import InputText from "../../components/inputs/textInput";
+import Input from "../../components/Input";
 import Logo from "../../assets/Logo.png";
-import TextButton from "../../components/inputs/button";
 import { useAuth } from "context/AuthContext";
 
 function Login() {
@@ -24,11 +24,23 @@ function Login() {
           <Col sm={4} md={4} lg={2}>
             <S.ImageLogo src={Logo} />
 
-            <InputText name="email" type="text" label="Usuário" required />
+            <Input
+              name="email"
+              type="text"
+              label="Usuário"
+              error={!!methods.formState.errors.email}
+              required
+            />
 
-            <InputText name="password" type="text" label="Senha" required />
+            <Input
+              name="password"
+              type="text"
+              label="Senha"
+              error={!!methods.formState.errors.password}
+              required
+            />
 
-            <TextButton text="Entrar" type="submit" />
+            <Button text="Entrar" type="submit" />
           </Col>
         </S.Container>
       </Form>

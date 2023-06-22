@@ -2,15 +2,15 @@ import * as S from "./style";
 
 import { Col, Row } from "react-bootstrap";
 
+import Button from "../../../components/Button";
 import FailRequest from "components/HandleRequest/Fail";
 import { Form } from "react-bootstrap";
 import { FormProvider } from "react-hook-form";
 import { ICreateCompra } from "./types";
-import InputText from "../../../components/inputs/textInput";
-import Select from "components/inputs/selectInput";
+import Input from "../../../components/Input";
+import Select from "components/Select";
 import SessaoExpirada from "components/SectionExpired";
 import SucessRequest from "components/HandleRequest/Sucess";
-import TextButton from "../../../components/inputs/button";
 import api from "../../../services/api";
 import { useAuth } from "context/AuthContext";
 import { useForm } from "react-hook-form";
@@ -68,10 +68,11 @@ function CreateCompra() {
         <S.Container>
           <Col sm={4} md={2}>
             <Row>
-              <InputText
+              <Input
                 name="valorTotal"
                 type="number"
                 label="Valor total"
+                error={!!methods.formState.errors.valorTotal}
                 required
               />
             </Row>
@@ -117,20 +118,22 @@ function CreateCompra() {
                         },
                       ]
                 }
+                error={!!methods.formState.errors.parcelas}
                 required
               />
             </Row>
             <Row>
-              <InputText
+              <Input
                 name="dataCompra"
                 type="date"
                 label="Data da compra"
+                error={!!methods.formState.errors.dataCompra}
                 required
               />
             </Row>
 
             <Row className="justify-content-end">
-              <TextButton width="160px" text="Enviar" type="submit" />
+              <Button width="160px" text="Enviar" type="submit" />
             </Row>
           </Col>
         </S.Container>

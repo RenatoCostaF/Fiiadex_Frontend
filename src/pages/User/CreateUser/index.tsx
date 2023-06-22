@@ -2,15 +2,15 @@ import * as S from "./style";
 
 import { Col, Row } from "react-bootstrap";
 
+import Button from "../../../components/Button";
 import FailRequest from "components/HandleRequest/Fail";
 import { Form } from "react-bootstrap";
 import { FormProvider } from "react-hook-form";
 import { ICreateUser } from "./types";
-import InputText from "../../../components/inputs/textInput";
-import Select from "components/inputs/selectInput";
+import Input from "../../../components/Input";
+import Select from "components/Select";
 import SessaoExpirada from "components/SectionExpired";
 import SucessRequest from "components/HandleRequest/Sucess";
-import TextButton from "../../../components/inputs/button";
 import api from "../../../services/api";
 import { useAuth } from "context/AuthContext";
 import { useForm } from "react-hook-form";
@@ -62,17 +62,35 @@ function CreateUser() {
   return (
     <FormProvider {...methods}>
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
-        <S.TitleTable>Cadastro de usuário</S.TitleTable>
+        <S.TitleTable>Cadastro de Usuário</S.TitleTable>
         <S.Container>
           <Col sm={4} md={2}>
             <Row>
-              <InputText name="name" type="text" label="Nome" required />
+              <Input
+                name="name"
+                type="text"
+                label="Nome"
+                error={!!methods.formState.errors.name}
+                required
+              />
             </Row>
             <Row>
-              <InputText name="email" type="text" label="Email" required />
+              <Input
+                name="email"
+                type="text"
+                label="Email"
+                error={!!methods.formState.errors.email}
+                required
+              />
             </Row>
             <Row>
-              <InputText name="password" type="text" label="Senha" required />
+              <Input
+                name="password"
+                type="text"
+                label="Senha"
+                error={!!methods.formState.errors.password}
+                required
+              />
             </Row>
             <Row>
               <Select
@@ -96,12 +114,13 @@ function CreateUser() {
                     name: "USER",
                   },
                 ]}
+                error={!!methods.formState.errors.role}
                 required
               />
             </Row>
 
             <Row className="justify-content-end">
-              <TextButton width="160px" text="Enviar" type="submit" />
+              <Button width="160px" text="Enviar" type="submit" />
             </Row>
           </Col>
         </S.Container>
