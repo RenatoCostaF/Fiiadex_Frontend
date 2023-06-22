@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "types": [
-      "node"
+      "node",
+      "vite/client"
     ],
     "baseUrl": "src",
     "target": "ESNext",
