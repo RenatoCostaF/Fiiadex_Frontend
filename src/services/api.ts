@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3099",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 function refreshToken(error: AxiosResponse, token: string) {
