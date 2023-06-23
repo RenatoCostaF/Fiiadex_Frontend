@@ -35,7 +35,7 @@ function CreateCompra() {
 
     if (user) {
       try {
-        const response: any = await api.post(`/compra`, body);
+        const response: any = await api.post(`/create-compra`, body);
         setModal({
           show: true,
           size: "sm",
