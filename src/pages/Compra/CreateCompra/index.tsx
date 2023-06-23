@@ -70,7 +70,7 @@ function CreateCompra() {
             <Row>
               <Input
                 name="valorTotal"
-                type="number"
+                type="text"
                 label="Valor total"
                 error={!!methods.formState.errors.valorTotal}
                 required

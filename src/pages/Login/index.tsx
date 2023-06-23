@@ -7,6 +7,7 @@ import Button from "../../components/Button";
 import { ILogin } from "utils/AuthTypes";
 import Input from "../../components/Input";
 import Logo from "../../assets/Logo.png";
+import Password from "components/Password";
 import { useAuth } from "context/AuthContext";
 
 function Login() {
@@ -32,9 +33,8 @@ function Login() {
               required
             />
 
-            <Input
+            <Password
               name="password"
-              type="text"
               label="Senha"
               error={!!methods.formState.errors.password}
               required
