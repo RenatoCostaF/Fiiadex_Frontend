@@ -4,7 +4,7 @@ interface LoadingProps {
   status?: boolean;
 }
 
-const Loading = ({ status = false }: LoadingProps) => {
+const Loading = ({ status }: LoadingProps) => {
   return (
     <Container status={status}>
       <Spinner color="#58c7f3" background="#FFF" />

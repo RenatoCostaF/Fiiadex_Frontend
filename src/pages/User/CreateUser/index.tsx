@@ -14,12 +14,14 @@ import SucessRequest from "components/HandleRequest/Sucess";
 import api from "../../../services/api";
 import { useAuth } from "context/AuthContext";
 import { useForm } from "react-hook-form";
+import { useLoading } from "context/LoadingContext";
 import { useModal } from "context/ModalContext";
 import { useNavigate } from "react-router-dom";
 
 function CreateUser() {
   const { user } = useAuth();
   const { setModal } = useModal();
+  const { setLoading } = useLoading();
   const navigate = useNavigate();
   const methods = useForm<ICreateUser>({});
 
@@ -33,6 +35,7 @@ function CreateUser() {
 
     if (user) {
       try {
+        setLoading(true);
         const response: any = await api.post(`/user`, body);
         setModal({
           show: true,
@@ -48,6 +51,8 @@ function CreateUser() {
           hasTimeOut: true,
           component: <FailRequest message={err.response.data.message} />,
         });
+      } finally {
+        setLoading(false);
       }
     } else {
       setModal({

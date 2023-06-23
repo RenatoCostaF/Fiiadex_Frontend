@@ -11,12 +11,11 @@ export const CustomButton = styled(Button)<CustomButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
   font-size: 15px;
   white-space: nowrap;
   transition: 0.5s;
   margin-top: 20px;
-  background: none;
+  /* background: none; */
   width: ${({ width }) => (width ? width : "100%")};
   min-width: ${({ minWidth }) => (minWidth ? minWidth : "100")};
   &.btn-inside:hover,

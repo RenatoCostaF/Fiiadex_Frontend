@@ -1,19 +1,22 @@
 import * as S from "./style";
 
+import { Col, Row, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 import { AiOutlineDelete } from "react-icons/ai";
+import Button from "components/Button";
 import FailRequest from "components/HandleRequest/Fail";
 import { IUser } from "./types";
 import SessaoExpirada from "components/SectionExpired";
 import SucessRequest from "components/HandleRequest/Sucess";
-import { Table } from "react-bootstrap";
 import api from "services/api";
 import { useAuth } from "context/AuthContext";
+import { useLoading } from "context/LoadingContext";
 import { useModal } from "context/ModalContext";
 
 function ListUser() {
   const { user } = useAuth();
+  const { setLoading } = useLoading();
   const { setModal, modalBlur, setModalBlur } = useModal();
 
   const [dataUser, setDataUser] = useState<IUser[]>([]);
@@ -21,9 +24,13 @@ function ListUser() {
   const getUser = async () => {
     if (user) {
       try {
+        setLoading(true);
         const { data } = await api.get("/user");
         setDataUser(data.data);
-      } catch (err) {}
+      } catch (err) {
+      } finally {
+        setLoading(false);
+      }
     } else {
       setModal({
         show: true,
@@ -35,6 +42,28 @@ function ListUser() {
   };
 
   const handleDelete = async (id: string) => {
+    setModal({
+      show: true,
+      size: "sm",
+      component: (
+        <Col>
+          <S.TitleTable>Confirmar?</S.TitleTable>
+          <Button
+            text="Sim"
+            type="button"
+            onClick={() => submitDelete(id)}
+          ></Button>
+          <Button
+            text="Não"
+            type="button"
+            onClick={() => setModal({ show: false })}
+          ></Button>
+        </Col>
+      ),
+    });
+  };
+
+  const submitDelete = async (id: string) => {
     try {
       await api.delete(`/user/${id}`);
       setModal({

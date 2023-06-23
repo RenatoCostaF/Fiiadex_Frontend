@@ -6,16 +6,19 @@ import { useEffect, useState } from "react";
 
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsFolder2Open } from "react-icons/bs";
+import Button from "components/Button";
 import FailRequest from "components/HandleRequest/Fail";
 import SessaoExpirada from "components/SectionExpired";
 import SucessRequest from "components/HandleRequest/Sucess";
 import api from "services/api";
 import { format } from "date-fns";
 import { useAuth } from "context/AuthContext";
+import { useLoading } from "context/LoadingContext";
 import { useModal } from "context/ModalContext";
 
 function ListCompra() {
   const { user, profile } = useAuth();
+  const { setLoading } = useLoading();
   const { setModal, modalBlur, setModalBlur } = useModal();
 
   const [dataCompra, setDataCompra] = useState<ICompra[]>([]);
@@ -23,6 +26,7 @@ function ListCompra() {
   const getCompra = async () => {
     if (user) {
       try {
+        setLoading(true);
         if (profile === "ADMIN") {
           const { data } = await api.get("/compra");
           setDataCompra(data.data);
@@ -30,7 +34,10 @@ function ListCompra() {
           const { data } = await api.post("/compra", { userId: user.id });
           setDataCompra(data.data);
         }
-      } catch (err) {}
+      } catch (err) {
+      } finally {
+        setLoading(false);
+      }
     } else {
       setModal({
         show: true,
@@ -68,6 +75,28 @@ function ListCompra() {
   };
 
   const handleDelete = async (id: string) => {
+    setModal({
+      show: true,
+      size: "sm",
+      component: (
+        <Col>
+          <S.TitleTable>Confirmar?</S.TitleTable>
+          <Button
+            text="Sim"
+            type="button"
+            onClick={() => submitDelete(id)}
+          ></Button>
+          <Button
+            text="Não"
+            type="button"
+            onClick={() => setModal({ show: false })}
+          ></Button>
+        </Col>
+      ),
+    });
+  };
+
+  const submitDelete = async (id: string) => {
     try {
       await api.delete(`/compra/${id}`);
       setModal({

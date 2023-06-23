@@ -26,7 +26,7 @@ export const ROUTES_AUTHENTICATED = [
   },
   {
     element: ListCompra,
-    path: "/ListCompra",
+    path: "/listar-compras",
     profiles: [PROFILES.ADMIN, PROFILES.USER],
   },
   {
@@ -36,7 +36,7 @@ export const ROUTES_AUTHENTICATED = [
   },
   {
     element: ListUser,
-    path: "/listUser",
+    path: "/listar-usuarios",
     profiles: [PROFILES.ADMIN],
   },
 ];

@@ -13,7 +13,7 @@ const links = [
       },
       {
         title: "Listar Compras",
-        path: "/ListCompra",
+        path: "/listar-compras",
         profiles: [PROFILES.ADMIN, PROFILES.USER],
       },
     ],
@@ -30,7 +30,7 @@ const links = [
       },
       {
         title: "Listar usuários",
-        path: "/listUser",
+        path: "/listar-usuarios",
         profiles: [PROFILES.ADMIN],
       },
     ],
