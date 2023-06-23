@@ -98,6 +98,7 @@ function ListCompra() {
 
   const submitDelete = async (id: string) => {
     try {
+      setLoading(true);
       await api.delete(`/compra/${id}`);
       setModal({
         show: true,
@@ -113,6 +114,8 @@ function ListCompra() {
         hasTimeOut: true,
         component: <FailRequest message="Erro ao deletar!" />,
       });
+    } finally {
+      setLoading(false);
     }
   };
 

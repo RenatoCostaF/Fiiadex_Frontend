@@ -65,6 +65,7 @@ function ListUser() {
 
   const submitDelete = async (id: string) => {
     try {
+      setLoading(true);
       await api.delete(`/user/${id}`);
       setModal({
         show: true,
@@ -80,6 +81,8 @@ function ListUser() {
         hasTimeOut: true,
         component: <FailRequest message="Erro ao deletar!" />,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
