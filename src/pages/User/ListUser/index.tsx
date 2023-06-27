@@ -1,6 +1,6 @@
 import * as S from "./style";
 
-import { Col, Row, Table } from "react-bootstrap";
+import { Col, Container, Row, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 import { AiOutlineDelete } from "react-icons/ai";
@@ -93,7 +93,7 @@ function ListUser() {
   return (
     <>
       <S.TitleTable>Lista de usuários</S.TitleTable>
-      <S.ContainerTable>
+      <Container style={{ overflowX: "auto" }}>
         <Table>
           <thead>
             <tr>
@@ -122,7 +122,7 @@ function ListUser() {
             ))}
           </tbody>
         </Table>
-      </S.ContainerTable>
+      </Container>
     </>
   );
 }

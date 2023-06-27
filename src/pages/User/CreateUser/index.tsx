@@ -8,6 +8,7 @@ import { Form } from "react-bootstrap";
 import { FormProvider } from "react-hook-form";
 import { ICreateUser } from "./types";
 import Input from "../../../components/Input";
+import Password from "components/Password";
 import Select from "components/Select";
 import SessaoExpirada from "components/SectionExpired";
 import SucessRequest from "components/HandleRequest/Sucess";
@@ -89,9 +90,8 @@ function CreateUser() {
               />
             </Row>
             <Row>
-              <Input
+              <Password
                 name="password"
-                type="text"
                 label="Senha"
                 error={!!methods.formState.errors.password}
                 required

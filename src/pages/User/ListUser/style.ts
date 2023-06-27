@@ -1,13 +1,6 @@
 import { Row } from "react-bootstrap";
 import styled from "styled-components";
 
-export const ContainerTable = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 6rem;
-`;
-
 export const ContainerModal = styled.div`
   display: flex;
   flex-direction: column;

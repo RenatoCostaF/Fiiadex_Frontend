@@ -1,6 +1,6 @@
 import * as S from "./style";
 
-import { Col, Table } from "react-bootstrap";
+import { Col, Container, Table } from "react-bootstrap";
 import { CompraParcela, ICompra } from "./types";
 import { useEffect, useState } from "react";
 
@@ -126,7 +126,7 @@ function ListCompra() {
   return (
     <>
       <S.TitleTable>Lista de compras</S.TitleTable>
-      <S.ContainerTable>
+      <Container style={{ overflowX: "auto" }}>
         <Table>
           <thead>
             <tr>
@@ -178,7 +178,7 @@ function ListCompra() {
             ))}
           </tbody>
         </Table>
-      </S.ContainerTable>
+      </Container>
     </>
   );
 }

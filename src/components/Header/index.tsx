@@ -1,5 +1,7 @@
+import * as S from "./style";
+
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -9,6 +11,7 @@ import { useAuth } from "context/AuthContext";
 function Header() {
   const { profile, handleLogout } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 992px)");
@@ -27,46 +30,52 @@ function Header() {
   }, []);
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="flex-column">
+    <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Toggle aria-controls="sidebar-nav" />
+        <Navbar.Toggle
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          aria-controls="navbar-collapse"
+          aria-expanded={!isCollapsed}
+        />
 
-        <Navbar.Collapse id="sidebar-nav">
-          <Nav className={isMobile ? "flex-column" : "flex-row"}>
-            {links.map((link) => {
+        <Navbar.Collapse>
+          <S.NavContent className={isMobile ? "flex-column" : "flex-row"}>
+            {links.map((link, index) => {
               if (profile && link.profiles.includes(profile)) {
                 return (
-                  <>
-                    <NavDropdown title={link.title}>
+                  <React.Fragment key={index}>
+                    <S.NavDropdownContent title={link.title}>
                       {link.submenu?.length &&
-                        link.submenu.map((submenu) => {
+                        link.submenu.map((submenu, subIndex) => {
                           if (profile && submenu.profiles.includes(profile)) {
                             return (
-                              <>
+                              <React.Fragment key={subIndex}>
                                 <NavDropdown.Item as={Link} to={submenu.path}>
                                   {submenu.title}
                                 </NavDropdown.Item>
-                              </>
+                              </React.Fragment>
                             );
                           }
                           return;
                         })}
-                    </NavDropdown>
+                    </S.NavDropdownContent>
                     ;
-                  </>
+                  </React.Fragment>
                 );
               }
             })}
-          </Nav>
+            <S.ContentIcon isCollapsed={isCollapsed} isMobile={isMobile}>
+              <FiLogOut
+                color="#fff"
+                size={24}
+                onClick={() => handleLogout()}
+                style={{
+                  cursor: "pointer",
+                }}
+              />
+            </S.ContentIcon>
+          </S.NavContent>
         </Navbar.Collapse>
-        <FiLogOut
-          color="#fff"
-          size={24}
-          onClick={() => handleLogout()}
-          style={{
-            cursor: "pointer",
-          }}
-        />
       </Container>
     </Navbar>
   );

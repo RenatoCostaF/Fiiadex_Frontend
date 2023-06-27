@@ -7,7 +7,6 @@ interface ButtonProps {
   style?: React.CSSProperties | undefined;
   width?: string;
   minWidth?: string;
-  borderRadius?: string;
   icon?: React.ReactNode;
   disabled?: boolean;
 }
@@ -19,15 +18,13 @@ function Button({
   style,
   width,
   minWidth,
-  borderRadius,
   icon,
   disabled = false,
 }: ButtonProps) {
   return (
     <CustomButton
       width={width}
-      minWidth={minWidth}
-      borderRadius={borderRadius}
+      minwidth={minWidth}
       style={style}
       type={type}
       onClick={onClick}

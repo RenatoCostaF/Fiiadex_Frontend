@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 interface CustomButtonProps {
   width?: string;
-  minWidth?: string;
-  borderRadius?: string;
+  minwidth?: string;
 }
 
 export const CustomButton = styled(Button)<CustomButtonProps>`
@@ -17,7 +16,7 @@ export const CustomButton = styled(Button)<CustomButtonProps>`
   margin-top: 20px;
   /* background: none; */
   width: ${({ width }) => (width ? width : "100%")};
-  min-width: ${({ minWidth }) => (minWidth ? minWidth : "100")};
+  min-width: ${({ minwidth }) => (minwidth ? minwidth : "100")};
   &.btn-inside:hover,
   &.btn-inside:active,
   &.btn-inside:focus {
