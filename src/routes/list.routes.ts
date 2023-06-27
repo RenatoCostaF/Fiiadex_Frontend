@@ -22,7 +22,7 @@ export const ROUTES_AUTHENTICATED = [
   {
     element: CreateCompra,
     path: "/compra",
-    profiles: [PROFILES.ADMIN],
+    profiles: [PROFILES.ADMIN, PROFILES.USER],
   },
   {
     element: ListCompra,

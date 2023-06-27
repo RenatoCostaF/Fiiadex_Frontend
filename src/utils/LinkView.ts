@@ -9,7 +9,7 @@ const links = [
       {
         title: "Cadastrar compra",
         path: "/compra",
-        profiles: [PROFILES.ADMIN],
+        profiles: [PROFILES.ADMIN, PROFILES.USER],
       },
       {
         title: "Listar Compras",
