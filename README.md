@@ -1,6 +1,6 @@
 # Fiiadex - README
 
-Este é o repositório do projeto Fiiadex, que consiste em um aplicativo de gerenciamento de ativos de fundos de investimento imobiliário (FII).
+Este é o repositório do projeto Fiiadex, que consiste em um aplicação web de gerenciamento de usuários e suas respectivas compras. 
 
 ## Acesso ao Aplicativo
 
