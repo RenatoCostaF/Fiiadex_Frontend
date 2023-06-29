@@ -6,7 +6,7 @@ Este é o repositório do projeto Fiiadex, que consiste em um aplicação web de
 
 Para acessar o aplicativo em produção, utilize as seguintes credenciais:
 
-- **Email:** teste@gmail.com
+- **Usuário:** teste@gmail.com
 - **Senha:** 1234
 
 Acesse o aplicativo [aqui](https://fiiadex-frontend.vercel.app/).
