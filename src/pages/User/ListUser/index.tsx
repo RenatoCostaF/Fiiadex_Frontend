@@ -46,19 +46,27 @@ function ListUser() {
       show: true,
       size: "sm",
       component: (
-        <Col>
-          <S.TitleTable>Confirmar?</S.TitleTable>
-          <Button
-            text="Sim"
-            type="button"
-            onClick={() => submitDelete(id)}
-          ></Button>
-          <Button
-            text="Não"
-            type="button"
-            onClick={() => setModal({ show: false })}
-          ></Button>
-        </Col>
+        <>
+          <Col sm={12}>
+            <S.TitleTable>Confirmar?</S.TitleTable>
+          </Col>
+          <S.ContainerModal>
+            <Col>
+              <Button
+                text="Sim"
+                type="button"
+                onClick={() => submitDelete(id)}
+              />
+            </Col>
+            <Col>
+              <Button
+                text="Não"
+                type="button"
+                onClick={() => setModal({ show: false })}
+              />
+            </Col>
+          </S.ContainerModal>
+        </>
       ),
     });
   };

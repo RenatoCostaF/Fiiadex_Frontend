@@ -25,7 +25,7 @@ function DefaultModal({
       const timer = setTimeout(() => {
         handleLogout();
         onHide();
-      }, 2500);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [hasExpiredSection]);
@@ -34,7 +34,7 @@ function DefaultModal({
     if (hasTimeOut) {
       const timer = setTimeout(() => {
         onHide();
-      }, 2500);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [hasTimeOut]);

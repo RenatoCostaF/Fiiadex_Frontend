@@ -1,11 +1,19 @@
 import { Row } from "react-bootstrap";
 import styled from "styled-components";
 
-export const ContainerModal = styled.div`
+export const ContainerModalParcelas = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const ContainerModal = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
 `;
 
 export const TitleTable = styled.div`
@@ -21,6 +29,7 @@ export const TitleModal = styled.div`
   justify-content: center;
   align-items: center;
   margin: 1rem 1rem;
+
   background-color: #1c1c1c;
   color: #fff;
 `;
